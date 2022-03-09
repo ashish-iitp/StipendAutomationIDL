@@ -19,6 +19,7 @@
       <input type="password" name="password" placeholder="password" />
       <button type="submit">login</button>
     </form>
+    <a href="{% url 'getotp' %}">Forgot Password</a>
 
     {% for message in messages %}
     <h1>{{message}}</h1>
