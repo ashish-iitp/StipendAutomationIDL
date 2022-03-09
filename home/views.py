@@ -7,24 +7,25 @@ from django.core.mail import EmailMessage
 import random
 
 
+sentOTP = 0
+userEmail = ''
 
-sentOTP=0
-userEmail=''
 
 def home(req):
     return render(req, 'home.html')
 
+
 def getOTP(req):
     if req.method == 'POST':
+        global sentOTP, userEmail
         email = req.POST['email']
         otp = random.randint(100000, 999999)
-        sentOTP=otp
-        userEmail=email
-        # msg = EmailMessage('Reset OTP',
-        #                    f'OTP is : {otp}', to=[email])
-        # msg.send()
+        sentOTP = otp
+        userEmail = email
+        msg = EmailMessage('Reset OTP',
+                           f'OTP is : {otp}', to=[email])
+        msg.send()
         return redirect('changepasswd')
-
 
     return render(req, 'getotp.html')
 
@@ -86,16 +87,16 @@ def change_passwd(req):
     if req.method == 'POST':
         user_otp = int(req.POST['otp'])
         new_passwd = req.POST['newpasswd']
-        print(sentOTP)
+        print(userEmail)
 
-        # if User.objects.filter(email=userEmail).exists() and user_otp == sentOTP and new_passwd != '':
-        #     user = User.objects.get(email__exact=userEmail)
-        #     print(user)
-        #     user.set_password(new_passwd)
-        #     user.save()
-        #     messages.info(req, 'Password Reset Successfully')
-        #     return redirect("login")
-        # else:
-        #     messages.info(req, 'wrong credentials properly')
+        if User.objects.filter(email=userEmail).exists() and user_otp == sentOTP and new_passwd != '':
+            user = User.objects.get(email__exact=userEmail)
+            print(user)
+            user.set_password(new_passwd)
+            user.save()
+            messages.info(req, 'Password Reset Successfully')
+            return redirect("login")
+        else:
+            messages.info(req, 'wrong credentials properly')
 
     return render(req, 'changepasswd.html')
