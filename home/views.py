@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -5,6 +6,8 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.core.mail import EmailMessage
 import random
+from home.models import *
+
 
 
 sentOTP = 0
@@ -13,7 +16,6 @@ userEmail = ''
 
 def home(req):
     return render(req, 'home.html')
-
 
 def getOTP(req):
     if req.method == 'POST':
@@ -56,8 +58,7 @@ def register(req):
             else:
                 messages.info(req, 'password not matching')
                 return redirect('register')
-    elif req.user.is_authenticated:
-        return redirect('home')
+    
     else:
         return render(req, 'register.html')
 
@@ -100,3 +101,25 @@ def change_passwd(req):
             messages.info(req, 'wrong credentials properly')
 
     return render(req, 'changepasswd.html')
+
+
+def add_emp(req):
+    if req.method == 'POST':
+        project = int(req.POST['project'])
+        first_name = req.POST['first_name']
+        last_name = req.POST['last_name']
+        bank_account = int(req.POST['bank_account'])
+        phone = int(req.POST['phone'])
+        email = req.POST['email']
+        password=req.POST['password']
+        from_date = req.POST['from_date']
+        to_date = req.POST['to_date']
+        new_emp=Employee(project=project,first_name=first_name,last_name=last_name,bank_account=bank_account,phone=phone,email=email,password=password,from_date=from_date,to_date=to_date)
+        new_emp.save()
+        return HttpResponse("Employee Added Succesfully!")
+    else:
+        return render(req, 'add_emp.html')
+
+
+
+            
