@@ -1,0 +1,85 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
+        <title>Login</title>
+        <style>
+      input {
+        display: block;
+      }
+        </style>
+        <style>
+      .cont-1 {
+        max-width: 350px !important;
+              max-height: 550px;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: purple;
+      }
+        </style>
+    </head>
+    <body style="background: url({% static 'bg4.jpg' %});width:100vw; height: 100vh; background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+        <nav class="navbar navbar-expand-lg navbar-blue bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+            </div>
+        </nav>
+        <br>
+        <br>
+
+        <div class="container cont-1">
+            <h1 style ="color : orange;">&nbsp; Student Login</h1>
+            <br>
+            <form method="post" action="{% url 'studlogin' %}">
+                {% csrf_token %}
+                {% comment %} &nbsp;&nbsp;&nbsp;<input type="text" name="username" placeholder="username" required /> {% endcomment %}
+                <label for="email" style ="color : white;">Username :</label>
+                <input type="email" name="email" placeholder="Username" required />
+                <label for="password" style ="color : white;">Password :</label>
+                &nbsp;&nbsp;&nbsp;
+                <input type="password" name="password" placeholder="Password" required />
+              
+                <hr style="height:3px;border-width:2;color:Black;background-color:black">
+               
+                <div align ="center"><button type="submit" class="btn btn-success btn-sm">login</button></div>
+            </form>
+        </div>
+        {% comment %} <h1>Login</h1>
+    <form method="post">
+      {% csrf_token %}
+     <div>Username : <input type="text" name="username" placeholder="username" /></div> <br>
+
+      <div>Password &nbsp;: <input type="password" name="password" placeholder="password" /></div> <br>
+      &nbsp;<button type="submit" class="btn btn-success">Login</button> <br>
+{% comment %} <button type="submit">login</button> {% endcomment %}
+{% comment %} </form> {% endcomment %}
+{% comment %} &nbsp;<a href="{% url 'getotp' %}">Forgot Password</a>  {% endcomment %}
+{% for message in messages %}<h1>{{ message }}</h1>{% endfor %}
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>

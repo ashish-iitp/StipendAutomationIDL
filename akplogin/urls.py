@@ -18,6 +18,10 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 
+admin.site.site_header = "RnD Administration"
+admin.site.site_title = "Admin Portal"
+admin.site.index_title = "Welcome to the Admin Page !"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),

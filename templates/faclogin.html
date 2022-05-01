@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -24,53 +25,32 @@
       }
     </style>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body style="background: url({% static 'bg4.jpg' %});width:100vw; height: 100vh; background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    <nav class="navbar navbar-expand-lg navbar-blue bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <a class="navbar-brand" href="/">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
+          </div>
       </div>
-    </nav>
+  </nav>
     <br><br>
     <div class="container cont-1">
-    &nbsp;<h1>Login</h1>
-    <form method="post" action="{% url 'login' %}">
+    <h1>&nbsp;&nbsp;Faculty Login</h1>
+    <form method="post" action="faclogin">
       {% csrf_token %}
+      <br>
       {% comment %} &nbsp;&nbsp;&nbsp;<input type="text" name="username" placeholder="username" required /> {% endcomment %}
-      &nbsp;&nbsp;&nbsp;<input type="email" name="email" placeholder="email" required />
-      &nbsp;&nbsp;&nbsp;<input type="password" name="password1" placeholder="password" required />
-      <hr>
-      &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-sm">login</button>
+      <label for="email">Username : </label>
+     <input type="email" name="email" placeholder="Username" required />
+      <label for="password">Password : </label>
+      &nbsp;&nbsp;&nbsp;<input type="password" name="password1" placeholder="Password" required /> 
+      <hr style="height:3px;border-width:2;color:Black;background-color:black">
+      <div align ="center"><button type="submit" class="btn btn-success btn-sm">login</button></div>
     </form>
   </div>
     {% comment %} <h1>Login</h1>
@@ -82,7 +62,7 @@
       &nbsp;<button type="submit" class="btn btn-success">Login</button> <br>
       {% comment %} <button type="submit">login</button> {% endcomment %}
     {% comment %} </form> {% endcomment %}
-    &nbsp;<a href="{% url 'getotp' %}">Forgot Password</a> 
+    {% comment %} &nbsp;<a href="{% url 'getotp' %}">Forgot Password</a>  {% endcomment %}
 
     {% for message in messages %}
     <h1>{{message}}</h1>
